@@ -1,2 +1,2 @@
-# lira-framework
+# Lira Framework
 A small prototyping framework
