@@ -1,8 +1,8 @@
 <?php
 
-namespace Scern\Lira;
+namespace Lira\Framework;
 
-use Scern\Lira\Results\Result;
+use Lira\Framework\Results\Result;
 
 abstract class Controller
 {

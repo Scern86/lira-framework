@@ -1,6 +1,6 @@
 <?php
 
-namespace Scern\Lira\Results;
+namespace Lira\Framework\Results;
 
 abstract readonly class Result
 {

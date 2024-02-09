@@ -1,8 +1,8 @@
 <?php
 
-namespace Scern\Lira;
+namespace Lira\Framework;
 
-use Scern\Lira\Traits\{Getter, Setter};
+use Lira\Framework\Traits\{Getter, Setter};
 
 class View
 {

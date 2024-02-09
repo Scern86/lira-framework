@@ -1,6 +1,6 @@
 <?php
 
-namespace Scern\Lira\Lexicon;
+namespace Lira\Framework\Lexicon;
 
 class Lexicon
 {

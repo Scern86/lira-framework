@@ -1,6 +1,6 @@
 <?php
 
-namespace Scern\Lira\Traits;
+namespace Lira\Framework\Traits;
 
 trait Setter
 {

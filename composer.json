@@ -1,11 +1,11 @@
 {
-    "name": "scern/lira-framework",
+    "name": "lira/framework",
     "description": "A small prototyping framework",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Scern\\Lira\\": "lira/"
+            "Lira\\Framework\\": "lira/"
         }
     },
     "authors": [
