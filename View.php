@@ -3,6 +3,7 @@
 namespace Lira\Framework;
 
 use Lira\Framework\Traits\{Getter, Setter};
+use Lira\Framework\Exceptions\FileNotFoundException;
 
 class View
 {
@@ -15,7 +16,7 @@ class View
 
     public function setTemplate(string $template): void
     {
-        if (!file_exists($template)) throw new \Exception('Template file is not exists');
+        if (!file_exists($template)) throw new FileNotFoundException();
         $this->template = $template;
     }
 

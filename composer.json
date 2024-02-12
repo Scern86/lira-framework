@@ -3,9 +3,10 @@
     "description": "A small prototyping framework",
     "type": "library",
     "license": "MIT",
+    "homepage": "https://scern.eu",
     "autoload": {
         "psr-4": {
-            "Lira\\Framework\\": "lira/"
+            "Lira\\Framework\\": ""
         }
     },
     "authors": [
