@@ -4,7 +4,7 @@ namespace Lira\Framework;
 
 class Model
 {
-    protected function __construct(protected \Lira\Framework\Database\DatabaseInterface $database)
+    public function __construct(\Lira\Framework\Database\DatabaseInterface $database)
     {
     }
 }
