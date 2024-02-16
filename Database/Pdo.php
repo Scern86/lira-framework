@@ -2,16 +2,18 @@
 
 namespace Lira\Framework\Database;
 
-class Pdo implements Database
+class Pdo implements DatabaseInterface
 {
-    protected \PDO $databaseObject;
-    public function __construct(string $database,string $user,string $password,string $host='127.0.0.1',int $port=5432)
+    protected \PDO $pdo;
+
+    public function __construct(string $database, string $user, string $password, string $host = '127.0.0.1', int $port = 5432)
     {
         $dsn = "pgsql:host={$host};port={$port};dbname={$database}";
-        $this->databaseObject = new \PDO($dsn, $user, $password);
+        $this->pdo = new \PDO($dsn, $user, $password);
     }
-    public function getDatabaseObject(): \PDO
+
+    public function connect(): \PDO
     {
-        return $this->databaseObject;
+        return $this->pdo;
     }
 }
