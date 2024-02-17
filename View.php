@@ -16,16 +16,24 @@ class View
 
     public function setTemplate(string $template): void
     {
-        if (!file_exists($template)) throw new FileNotFoundException();
-        $this->template = $template;
+        try{
+            if (!file_exists($template)) throw new \Exception('File not exists');
+            $this->template = $template;
+        }catch (\Throwable $e){
+            // TODO create event
+        }
     }
 
     public function render(): string
     {
-        if (is_null($this->template)) throw new \Exception('Template is undefined');
-        ob_start();
-        include $this->template;
-        $result = ob_get_clean();
-        return $result;
+        try{
+            if (is_null($this->template)) throw new \Exception('Template is undefined');
+            ob_start();
+            include $this->template;
+            $result = ob_get_clean();
+            return $result;
+        }catch (\Throwable $e){
+            // TODO create event
+        }
     }
 }
