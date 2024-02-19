@@ -3,11 +3,11 @@
 namespace Lira\Framework;
 
 use Lira\Framework\Traits\{Getter, Setter};
-use Lira\Framework\Exceptions\FileNotFoundException;
+use Lira\Framework\Events\{Event, EventType, EventsSupport};
 
 class View
 {
-    use Getter, Setter;
+    use Getter, Setter, EventsSupport;
 
     public function __construct(protected ?string $template = null, protected array $values = [], bool $appendOnly = false)
     {
@@ -20,20 +20,23 @@ class View
             if (!file_exists($template)) throw new \Exception('File not exists');
             $this->template = $template;
         }catch (\Throwable $e){
-            // TODO create event
+            $event = new Event(EventType::ERROR,'invalid_template',[$e]);
+            $this?->eventDispatcher->dispatch($event);
         }
     }
 
     public function render(): string
     {
+        $result = '';
         try{
             if (is_null($this->template)) throw new \Exception('Template is undefined');
             ob_start();
             include $this->template;
             $result = ob_get_clean();
-            return $result;
         }catch (\Throwable $e){
-            // TODO create event
+            $event = new Event(EventType::ERROR,'invalid_template',[$e]);
+            $this?->eventDispatcher->dispatch($event);
         }
+        return $result;
     }
 }

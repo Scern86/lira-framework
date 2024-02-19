@@ -2,8 +2,14 @@
 
 namespace Lira\Framework;
 
+use Lira\Framework\Events\Event;
+use Lira\Framework\Events\EventsSupport;
+use Lira\Framework\Events\EventType;
+
 class Router
 {
+    use EventsSupport;
+
     public function __construct(public string $default, protected array $routes = [])
     {
     }
@@ -26,7 +32,8 @@ class Router
             }
             return $this->default;
         }catch (\Throwable $e){
-            // TODO create event
+            $event = new Event(EventType::ERROR,'invalid_controller',[$e]);
+            $this?->eventDispatcher->dispatch($event);
             return  '';
         }
     }
