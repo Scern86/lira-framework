@@ -2,7 +2,7 @@
 
 namespace Lira\Framework\Events;
 
-enum EventType
+enum Type
 {
     case NOTIFY;
     case ERROR;

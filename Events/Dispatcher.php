@@ -2,7 +2,8 @@
 
 namespace Lira\Framework\Events;
 
-class Dispatcher{
+class Dispatcher
+{
     protected array $listenersByName = [];
     protected array $listenersByType = [];
 
@@ -24,12 +25,12 @@ class Dispatcher{
         unset($listener);
     }
 
-    public function listenByName(string $eventName,callable $listener)
+    public function listenByName(string $eventName, callable $listener)
     {
         $this->listenersByName[$eventName][] = $listener;
     }
 
-    public function listenByType(EventType $type, callable $listener)
+    public function listenByType(Type $type, callable $listener)
     {
         $this->listenersByType[$type->name][] = $listener;
     }

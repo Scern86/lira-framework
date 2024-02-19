@@ -3,7 +3,7 @@
 namespace Lira\Framework;
 
 use Lira\Framework\Traits\{Getter, Setter};
-use Lira\Framework\Events\{Event, EventType, EventsSupport};
+use Lira\Framework\Events\{Event, Type, Level, EventsSupport};
 
 class View
 {
@@ -16,11 +16,11 @@ class View
 
     public function setTemplate(string $template): void
     {
-        try{
+        try {
             if (!file_exists($template)) throw new \Exception('File not exists');
             $this->template = $template;
-        }catch (\Throwable $e){
-            $event = new Event(EventType::ERROR,'invalid_template',[$e]);
+        } catch (\Throwable $e) {
+            $event = new Event(Type::ERROR, Level::WARNING, 'invalid_template', [$e]);
             $this?->eventDispatcher->dispatch($event);
         }
     }
@@ -28,13 +28,13 @@ class View
     public function render(): string
     {
         $result = '';
-        try{
+        try {
             if (is_null($this->template)) throw new \Exception('Template is undefined');
             ob_start();
             include $this->template;
             $result = ob_get_clean();
-        }catch (\Throwable $e){
-            $event = new Event(EventType::ERROR,'invalid_template',[$e]);
+        } catch (\Throwable $e) {
+            $event = new Event(Type::ERROR, Level::CRITICAL, 'invalid_template', [$e]);
             $this?->eventDispatcher->dispatch($event);
         }
         return $result;

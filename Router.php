@@ -2,9 +2,7 @@
 
 namespace Lira\Framework;
 
-use Lira\Framework\Events\Event;
-use Lira\Framework\Events\EventsSupport;
-use Lira\Framework\Events\EventType;
+use Lira\Framework\Events\{Event, EventsSupport, Type, Level};
 
 class Router
 {
@@ -16,7 +14,7 @@ class Router
 
     public function execute(string $url): string
     {
-        try{
+        try {
             if (!empty($this->routes)) {
                 foreach ($this->routes as $regex => $controller) {
                     if (preg_match($regex, $url)) {
@@ -31,10 +29,10 @@ class Router
                 throw new \Exception('Invalid Controller class');
             }
             return $this->default;
-        }catch (\Throwable $e){
-            $event = new Event(EventType::ERROR,'invalid_controller',[$e]);
+        } catch (\Throwable $e) {
+            $event = new Event(Type::ERROR, Level::CRITICAL, 'invalid_controller', [$e]);
             $this?->eventDispatcher->dispatch($event);
-            return  '';
+            return '';
         }
     }
 }

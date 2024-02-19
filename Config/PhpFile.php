@@ -2,7 +2,7 @@
 
 namespace Lira\Framework\Config;
 
-use Lira\Framework\Events\{Event,EventType};
+use Lira\Framework\Events\{Event, Level, Type};
 
 class PhpFile extends Source
 {
@@ -11,9 +11,9 @@ class PhpFile extends Source
         try {
             if (!file_exists($file)) throw new \Exception("File {$file} not exists");
             $values = include $file;
-            if(!is_array($values)) throw new \Exception("File {$file} is invalid");
+            if (!is_array($values)) throw new \Exception("File {$file} is invalid");
         } catch (\Throwable $e) {
-            $event = new Event(EventType::ERROR,'invalid_file',[$e]);
+            $event = new Event(Type::ERROR, Level::CRITICAL, 'invalid_file', [$e]);
             $this?->eventDispatcher->dispatch($event);
             $values = [];
         }
