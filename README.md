@@ -21,4 +21,4 @@ PHP >8.3
 ### composer require lira/framework
 
 # License
-The Lira framework is licensed under the MIT license.
+The Lira framework is licensed under the [MIT](LICENSE) license.
