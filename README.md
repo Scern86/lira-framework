@@ -15,7 +15,7 @@ The project has no end goal; the journey is what matters - continual development
 - minimum dependencies
 
 # Dependencies:
-PHP >8.3
+- PHP >8.3
 
 # Installation
 ### composer require lira/framework

@@ -3,7 +3,7 @@
     "description": "A small prototyping framework",
     "type": "library",
     "license": "MIT",
-    "homepage": "https://scern.eu",
+    "homepage": "https://scern.eu/lira/framework",
     "autoload": {
         "psr-4": {
             "Lira\\Framework\\": ""
@@ -15,8 +15,8 @@
             "email": "scern86@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "alpha",
     "require": {
-        "php": ">8.3"
+        "php": ">=8.3"
     }
 }
