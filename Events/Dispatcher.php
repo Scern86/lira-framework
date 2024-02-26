@@ -4,34 +4,33 @@ namespace Lira\Framework\Events;
 
 class Dispatcher
 {
-    protected array $listenersByName = [];
-    protected array $listenersByType = [];
+    protected array $listeners = [];
 
-    public function dispatch(Event $event): void
+    public function triggerEvent(Event $event): void
     {
-        $eventName = $event->name;
-        if (!empty($this->listenersByName[$eventName])) {
-            foreach ($this->listenersByName[$eventName] as $listener) {
+        foreach ($this->listeners as ['name'=>$name,'listener'=>$listener,'class'=>$class,'level'=>$level]) {
+            if (
+                $level->value <= $event->level->value
+                && in_array($class,['all',$event::class])
+                && in_array($name,['all',$event->name])
+            ) {
                 call_user_func($listener, $event);
             }
         }
-        unset($listener);
-        $eventType = $event->type->name;
-        if (!empty($this->listenersByType[$eventType])) {
-            foreach ($this->listenersByType[$eventType] as $listener) {
-                call_user_func($listener, $event);
-            }
-        }
-        unset($listener);
     }
 
-    public function listenByName(string $eventName, callable $listener)
+    public function addEventListener(
+        callable $listener,
+        Level $eventLevel,
+        string $eventName = 'all',
+        string $eventClass='all'
+    ): void
     {
-        $this->listenersByName[$eventName][] = $listener;
-    }
-
-    public function listenByType(Type $type, callable $listener)
-    {
-        $this->listenersByType[$type->name][] = $listener;
+        $this->listeners[] = [
+            'name'=>$eventName,
+            'listener'=>$listener,
+            'class'=>$eventClass,
+            'level'=>$eventLevel,
+        ];
     }
 }
