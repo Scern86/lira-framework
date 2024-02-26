@@ -2,10 +2,10 @@
 
 namespace Lira\Framework\Events;
 
-enum Level
+enum Level: int
 {
-    case DEBUG;
-    case INFO;
-    case WARNING;
-    case CRITICAL;
+    case DEBUG = 10;
+    case INFO = 20;
+    case WARNING = 30;
+    case CRITICAL = 40;
 }
