@@ -4,5 +4,5 @@ namespace Lira\Framework\Logger;
 
 interface LoggerInterface
 {
-    public function connect();
+    public function get(string $name);
 }
