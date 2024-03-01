@@ -11,4 +11,27 @@ class PhpFile extends Source
         if (!is_array($values)) throw new \Exception("File {$file} is invalid");
         parent::__construct($values);
     }
+
+    public static function createConfig($filepath,array $data): bool
+    {
+        try{
+            $pathinfo = pathinfo($filepath);
+            $directory = $pathinfo['dirname'];
+            if(\Lira\Framework\Files::isWritableDir($directory)){
+                $string = var_export($data,true);
+
+                $conf = <<<EOT
+<?php
+
+return {$string};
+EOT;
+                $file = $pathinfo['basename'];
+                file_put_contents($directory.DIRECTORY_SEPARATOR.$file,$conf);
+                return true;
+            }
+        }catch (\Throwable $e){
+            var_dump($e);
+        }
+        return false;
+    }
 }
