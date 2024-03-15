@@ -1,9 +1,12 @@
 # Lira Framework.
-A compact framework for prototyping.
+
+<a href="https://github.com/Scern86/lira-framework/releases"><img src="https://img.shields.io/github/release/Scern86/lira-framework.svg" alt="GitHub release"></a>
+
+A compact MVC framework.
 
 This is a project where I explore and apply my own skills, as well as innovations in the PHP and JS programming languages.
 
-The project has no end goal; the journey is what matters - continual development.
+The project has no end goal, the journey is what matters - continual development.
 
 # Feature list:
 - Can handle configuration loading
