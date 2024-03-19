@@ -6,31 +6,20 @@ class Dispatcher
 {
     protected array $listeners = [];
 
-    public function triggerEvent(Event $event): void
+    public function dispatch(Event $event): void
     {
-        foreach ($this->listeners as ['name'=>$name,'listener'=>$listener,'class'=>$class,'level'=>$level]) {
-            if (
-                $level->value <= $event->level->value
-                && in_array($class,['all',$event::class])
-                && in_array($name,['all',$event->name])
-            ) {
+        if (array_key_exists($event->name, $this->listeners)) {
+            foreach ($this->listeners[$event->name] as $listener) {
                 call_user_func($listener, $event);
             }
         }
     }
 
-    public function addEventListener(
-        callable $listener,
-        Level $eventLevel,
-        string $eventName = 'all',
-        string $eventClass='all'
+    public function listen(
+        string $eventName,
+        callable $listener
     ): void
     {
-        $this->listeners[] = [
-            'name'=>$eventName,
-            'listener'=>$listener,
-            'class'=>$eventClass,
-            'level'=>$eventLevel,
-        ];
+        $this->listeners[$eventName][] = $listener;
     }
 }
