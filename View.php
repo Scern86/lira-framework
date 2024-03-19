@@ -26,7 +26,7 @@ class View
             include $this->template;
             return ob_get_clean();
         }catch (\Throwable $e){
-            trigger_error($e->getMessage(),E_USER_NOTICE);
+            trigger_error($e->getMessage(),E_USER_WARNING);
         }
         return '';
     }

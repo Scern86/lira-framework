@@ -12,7 +12,7 @@ class PhpFile extends Source
             $values = include $file;
             if (!is_array($values)) throw new \Exception("Php File {$file} is invalid");
         }catch (\Throwable $e){
-            trigger_error($e->getMessage());
+            trigger_error($e->getMessage(),E_USER_WARNING);
         }
         parent::__construct($values);
     }

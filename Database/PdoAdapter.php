@@ -24,7 +24,7 @@ class PdoAdapter implements \Lira\Framework\Database\DatabaseInterface
                 $this->pdo = new \PDO($dsn, $this->user, $this->password);
             }
         }catch (\Throwable $e){
-            trigger_error("Create PDO. Exception {$e->getMessage()}");
+            trigger_error("Create PDO. Exception {$e->getMessage()}",E_USER_WARNING);
         }
     }
 
@@ -33,7 +33,7 @@ class PdoAdapter implements \Lira\Framework\Database\DatabaseInterface
         try{
             return $this->pdo;
         }catch (\Throwable $e){
-            trigger_error("Return PDO. Exception {$e->getMessage()}");
+            trigger_error("Return PDO. Exception {$e->getMessage()}",E_USER_WARNING);
         }
         return null;
     }
