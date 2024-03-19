@@ -8,11 +8,11 @@ class PhpFile extends Source
     {
         $values = [];
         try{
-            if (!file_exists($file)) trigger_error("Php File {$file} not exists");
+            if (!file_exists($file)) throw new \Exception("Php File {$file} not exists");
             $values = include $file;
-            if (!is_array($values)) trigger_error("Php File {$file} is invalid");
+            if (!is_array($values)) throw new \Exception("Php File {$file} is invalid");
         }catch (\Throwable $e){
-            trigger_error("Php File. Exception {$e->getMessage()}");
+            trigger_error($e->getMessage());
         }
         parent::__construct($values);
     }

@@ -18,10 +18,10 @@ class Router
             }
         }
         if (!class_exists($this->default)) {
-            trigger_error('Router execute. Controller not found');
+            throw new \Exception('Router execute. Controller not found');
         }
         if (!is_subclass_of($this->default, Controller::class)) {
-            trigger_error('Router execute. Invalid Controller class');
+            throw new \Exception('Router execute. Invalid Controller class');
         }
         return $this->default;
     }
