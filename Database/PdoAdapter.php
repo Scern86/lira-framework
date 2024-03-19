@@ -18,14 +18,23 @@ class PdoAdapter implements \Lira\Framework\Database\DatabaseInterface
 
     public function init(): void
     {
-        if (is_null($this->pdo)) {
-            $dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->database}";
-            $this->pdo = new \PDO($dsn, $this->user, $this->password);
+        try{
+            if (is_null($this->pdo)) {
+                $dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->database}";
+                $this->pdo = new \PDO($dsn, $this->user, $this->password);
+            }
+        }catch (\Throwable $e){
+            trigger_error("Create PDO. Exception {$e->getMessage()}");
         }
     }
 
     public function connect(): ?\PDO
     {
-        return $this->pdo;
+        try{
+            return $this->pdo;
+        }catch (\Throwable $e){
+            trigger_error("Return PDO. Exception {$e->getMessage()}");
+        }
+        return null;
     }
 }

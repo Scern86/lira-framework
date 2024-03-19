@@ -6,32 +6,14 @@ class PhpFile extends Source
 {
     public function __construct(protected string $file)
     {
-        if (!file_exists($file)) throw new \Exception("File {$file} not exists");
-        $values = include $file;
-        if (!is_array($values)) throw new \Exception("File {$file} is invalid");
-        parent::__construct($values);
-    }
-
-    public static function createConfig($filepath,array $data): bool
-    {
+        $values = [];
         try{
-            $pathinfo = pathinfo($filepath);
-            $directory = $pathinfo['dirname'];
-            if(\Lira\Framework\Files::isWritableDir($directory)){
-                $string = var_export($data,true);
-
-                $conf = <<<EOT
-<?php
-
-return {$string};
-EOT;
-                $file = $pathinfo['basename'];
-                file_put_contents($directory.DIRECTORY_SEPARATOR.$file,$conf);
-                return true;
-            }
+            if (!file_exists($file)) trigger_error("Php File {$file} not exists");
+            $values = include $file;
+            if (!is_array($values)) trigger_error("Php File {$file} is invalid");
         }catch (\Throwable $e){
-            var_dump($e);
+            trigger_error("Php File. Exception {$e->getMessage()}");
         }
-        return false;
+        parent::__construct($values);
     }
 }

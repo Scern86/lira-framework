@@ -19,10 +19,15 @@ class View
 
     public function render(): string
     {
-        if (empty($this->template)) throw new \Exception('Template is undefined');
-        if (!file_exists($this->template)) throw new \Exception('File not exists');
-        ob_start();
-        include $this->template;
-        return ob_get_clean();
+        try{
+            if (empty($this->template)) trigger_error('Render View. Template is undefined');
+            if (!file_exists($this->template)) trigger_error('Render View. File not exists');
+            ob_start();
+            include $this->template;
+            return ob_get_clean();
+        }catch (\Throwable $e){
+            trigger_error("Render View. Exception {$e->getMessage()}");
+        }
+        return '';
     }
 }
